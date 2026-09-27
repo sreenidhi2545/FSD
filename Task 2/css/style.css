@@ -1,0 +1,810 @@
+/* ==========================================================================
+   Portfolio of Ennala Sreenidhi - Task 2: CSS3 & Responsive Design
+   Mobile-first: base styles target small screens (< 600px), then
+   min-width media queries scale the layout up at 600px and 992px.
+   ========================================================================== */
+
+/* ---------- TYPOGRAPHY: Google Fonts (Poppins for headings, Inter for body) ---------- */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap");
+
+
+/* ==========================================================================
+   1. COLOURS - palette defined once as CSS variables, used everywhere
+   ========================================================================== */
+:root {
+    --color-primary: #1e3a8a;        /* navy - links, headings accents, buttons */
+    --color-primary-dark: #172554;   /* hover state for primary */
+    --color-secondary: #0f766e;      /* teal - secondary highlights */
+    --color-accent: #f59e0b;         /* amber - decorative bars, badges */
+    --color-bg: #f8fafc;             /* page background */
+    --color-surface: #ffffff;        /* cards, header, table, form */
+    --color-text: #0f172a;           /* main text (contrast ~17:1 on bg) */
+    --color-muted: #475569;          /* secondary text (contrast ~7:1 on bg) */
+    --color-border: #e2e8f0;         /* hairlines and card borders */
+    --color-tint: #eef2ff;           /* soft primary tint for highlights */
+    --color-highlight: #fef3c7;      /* light amber table-row hover */
+    --color-input-border: #94a3b8;   /* form field borders */
+    --color-placeholder: #64748b;    /* placeholder text */
+    --color-footer-text: #cbd5e1;    /* footer body text */
+    --color-footer-link: #e2e8f0;    /* footer links */
+    --color-focus-ring: rgba(30, 58, 138, 0.25); /* input focus glow */
+
+    /* Typography tokens */
+    --font-heading: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+    /* Spacing and shape tokens */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2.5rem;
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-pill: 999px;
+    --shadow: 0 1px 3px rgba(15, 23, 42, 0.08), 0 4px 12px rgba(15, 23, 42, 0.05);
+    --shadow-hover: 0 8px 24px rgba(15, 23, 42, 0.12);
+    --container: 1100px;
+}
+
+
+/* ==========================================================================
+   2. BOX MODEL - border-box on every element and pseudo-element
+   ========================================================================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Element selectors: reset default margins */
+body,
+h1,
+h2,
+h3,
+p,
+ul,
+figure {
+    margin: 0;
+}
+
+/* Images never overflow their container */
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* ==========================================================================
+   3. TYPOGRAPHY - base (mobile) type scale
+   ========================================================================== */
+body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-heading);
+    line-height: 1.25;
+    color: var(--color-text);
+}
+
+h1 {
+    font-size: 2rem;          /* 32px on mobile */
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-lg);
+}
+
+h2 {
+    font-size: 1.5rem;        /* 24px */
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-md);
+}
+
+h3 {
+    font-size: 1.125rem;      /* 18px */
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+}
+
+p {
+    margin-bottom: var(--space-md);
+}
+
+/* Pseudo-element (::after): decorative accent bar under every page title */
+main h1::after {
+    content: "";
+    display: block;
+    width: 3rem;
+    height: 4px;
+    margin-top: var(--space-sm);
+    border-radius: var(--radius-pill);
+    background-color: var(--color-accent);
+}
+
+/* Element selector: links */
+a {
+    color: var(--color-primary);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+/* Pseudo-class :hover on links */
+a:hover {
+    color: var(--color-secondary);
+}
+
+/* Pseudo-class :focus - visible keyboard focus ring for all links and buttons */
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/* Attribute selector + pseudo-element: mark links that open in a new tab */
+a[target="_blank"]::after {
+    content: " \2197";        /* north-east arrow */
+    font-size: 0.85em;
+}
+
+/* Attribute selector: mailto links */
+a[href^="mailto:"] {
+    word-break: break-all;
+}
+
+
+/* ==========================================================================
+   4. HEADER & NAV - sticky position + Flexbox layout
+   ========================================================================== */
+header {
+    position: sticky;           /* POSITIONING: header stays at top while scrolling */
+    top: 0;
+    z-index: 10;
+    display: flex;              /* FLEXBOX: brand + nav */
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm) var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow);
+}
+
+/* Child selector (>): brand name paragraph directly inside header */
+header > p {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+header > p a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+nav {
+    width: 100%;                /* mobile: nav drops to its own row */
+}
+
+/* Child selector: list directly inside nav - links wrap on small screens */
+nav > ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    padding: 0;
+    list-style: none;
+}
+
+/* Descendant selector: every link in the nav */
+nav a {
+    display: block;
+    padding: var(--space-xs) 0.75rem;
+    border: 1px solid transparent;
+    border-radius: var(--radius-pill);
+    color: var(--color-muted);
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+nav a:hover {
+    color: var(--color-primary);
+    background-color: var(--color-tint);
+}
+
+/* Attribute selector: highlight the current page link */
+nav a[aria-current="page"] {
+    color: var(--color-surface);
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    font-weight: 600;
+}
+
+
+/* ==========================================================================
+   5. MAIN CONTAINER - centred column with max width
+   ========================================================================== */
+main {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: var(--space-xl) var(--space-md);
+}
+
+/* Child selector: vertical rhythm between top-level sections */
+main > section {
+    margin-bottom: var(--space-xl);
+}
+
+/* Descendant selector: plain lists inside main */
+main ul {
+    padding-left: 1.25rem;
+}
+
+main li {
+    margin-bottom: var(--space-xs);
+}
+
+/* Custom bullet colour */
+main li::marker {
+    color: var(--color-secondary);
+}
+
+
+/* ==========================================================================
+   6. HOME PAGE HERO (index.html) - Flexbox (image + text)
+   ========================================================================== */
+.hero {
+    display: flex;              /* FLEXBOX: stacked and centred on mobile */
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-xl) var(--space-md);
+    text-align: center;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow);
+}
+
+/* Child selector: round profile photo */
+.hero > img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid var(--color-tint);
+    background-color: var(--color-tint);
+}
+
+.hero > h1 {
+    margin-bottom: 0;
+}
+
+.hero > h1::after {
+    margin-inline: auto;        /* centre the accent bar on mobile */
+}
+
+/* :first-of-type - tagline is the first paragraph in the hero */
+.hero > p:first-of-type {
+    font-size: 1.125rem;
+    color: var(--color-text);
+    margin-bottom: 0;
+}
+
+/* :last-child - location line */
+.hero > p:last-child {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.hero > p:last-child::before {
+    content: "\1F4CD  ";        /* pin icon before the location */
+}
+
+/* Call-to-action buttons below home content */
+.cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.cta a {
+    flex: 1 1 100%;             /* full width on mobile */
+    padding: 0.75rem var(--space-lg);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-sm);
+    text-align: center;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.cta a:first-child {
+    color: var(--color-surface);
+    background-color: var(--color-primary);
+}
+
+.cta a:first-child:hover {
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+}
+
+.cta a:last-child {
+    color: var(--color-primary);
+    background-color: transparent;
+}
+
+.cta a:last-child:hover {
+    background-color: var(--color-tint);
+}
+
+
+/* ==========================================================================
+   7. CARDS - shared card look for projects, internships and skill groups
+   ========================================================================== */
+.project-grid article,
+.internship-grid article,
+.skills-grid section {
+    padding: var(--space-lg);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.project-grid article:hover,
+.internship-grid article:hover,
+.skills-grid section:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* :first-child - card title sits flush with the top padding */
+article > h3:first-child {
+    margin-top: 0;
+    padding-right: 2.5rem;      /* room for the badge */
+}
+
+/* Adjacent sibling: meta line (tech stack / organisation) under each card title */
+article > h3 + p {
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--color-secondary);
+    margin-bottom: var(--space-md);
+}
+
+
+/* ==========================================================================
+   8. GRID - projects.html (1 / 2 / 3 columns)
+   ========================================================================== */
+.project-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    counter-reset: project;
+}
+
+/* Section heading spans the whole grid */
+.project-grid > h2,
+.internship-grid > h2,
+.skills-grid > h1 {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+}
+
+.project-grid article {
+    position: relative;         /* POSITIONING: anchor for the absolute badge */
+    display: flex;
+    flex-direction: column;
+    counter-increment: project;
+}
+
+/* POSITIONING: absolute number badge in the card corner (::before pseudo-element) */
+.project-grid article::before {
+    content: counter(project, decimal-leading-zero);
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    padding: 0.125rem 0.6rem;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-accent);
+    color: var(--color-text);
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.project-grid img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    margin-bottom: var(--space-md);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-tint);
+}
+
+/* Child selector: GitHub link pinned to the bottom of each card */
+.project-grid article > a {
+    margin-top: auto;
+    align-self: flex-start;
+    font-weight: 600;
+}
+
+/* Descendant selector: project names in the "Additional Projects" list */
+main li strong {
+    color: var(--color-primary);
+}
+
+
+/* ==========================================================================
+   9. GRID - about.html internships (1 / 2 columns)
+   ========================================================================== */
+.internship-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+}
+
+.internship-grid article {
+    border-left: 4px solid var(--color-secondary);
+}
+
+/* :nth-child - last paragraph (description) in each internship card */
+.internship-grid article p:nth-child(3) {
+    margin-bottom: 0;
+    color: var(--color-muted);
+}
+
+
+/* ==========================================================================
+   10. GRID - skills.html skill groups (1 / 2 / 3 columns)
+   ========================================================================== */
+.skills-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+}
+
+.skills-grid > section {
+    margin-bottom: 0;
+}
+
+.skills-grid h2 {
+    font-size: 1.125rem;
+    color: var(--color-primary);
+}
+
+/* Skills shown as pill "chips" with Flexbox wrap */
+.skills-grid ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    padding: 0;
+    list-style: none;
+}
+
+.skills-grid li {
+    margin: 0;
+    padding: var(--space-xs) 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    background-color: var(--color-tint);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+
+/* ==========================================================================
+   11. TABLE - education.html (scrolls horizontally on small screens)
+   ========================================================================== */
+.table-scroll {
+    overflow-x: auto;           /* table scrolls inside its section, page never breaks */
+}
+
+table {
+    width: 100%;
+    min-width: 560px;           /* forces horizontal scroll below this width */
+    border-collapse: collapse;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    font-size: 0.95rem;
+}
+
+caption {
+    padding-bottom: var(--space-sm);
+    text-align: left;
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    caption-side: top;
+}
+
+th,
+td {
+    padding: 0.75rem var(--space-md);
+    border: 1px solid var(--color-border);
+    text-align: left;
+    vertical-align: top;
+}
+
+/* Header row colour */
+thead th {
+    background-color: var(--color-primary);
+    color: var(--color-surface);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+/* :nth-child - zebra rows */
+tbody tr:nth-child(even) {
+    background-color: var(--color-tint);
+}
+
+tbody tr:hover {
+    background-color: var(--color-highlight);
+}
+
+
+/* ==========================================================================
+   12. CONTACT FORM - contact.html
+   ========================================================================== */
+form {
+    padding: var(--space-lg);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow);
+}
+
+/* Clear labels above each field */
+label {
+    display: block;
+    margin-bottom: var(--space-xs);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+/* Attribute selectors: text-like inputs, plus select and textarea - full width */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select,
+textarea {
+    display: block;
+    width: 100%;
+    padding: 0.7rem 0.85rem;
+    border: 1px solid var(--color-input-border);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    font: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* ID selector: message box */
+#message {
+    min-height: 8rem;
+    resize: vertical;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--color-placeholder);
+}
+
+/* :focus - clearly visible focus state */
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+
+/* Buttons */
+button {
+    width: 100%;
+    margin-bottom: var(--space-sm);
+    padding: 0.75rem var(--space-lg);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-sm);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+button[type="submit"] {
+    color: var(--color-surface);
+    background-color: var(--color-primary);
+}
+
+button[type="submit"]:hover {
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+}
+
+button[type="reset"] {
+    color: var(--color-primary);
+    background-color: transparent;
+}
+
+button[type="reset"]:hover {
+    background-color: var(--color-tint);
+}
+
+
+/* ==========================================================================
+   13. FOOTER - Flexbox layout
+   ========================================================================== */
+footer {
+    display: flex;              /* FLEXBOX: stacked on mobile, row on wider screens */
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-lg) var(--space-md);
+    background-color: var(--color-text);
+    color: var(--color-footer-text);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+footer > p {
+    margin: 0;
+}
+
+footer > ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-md);
+    padding: 0;
+    list-style: none;
+}
+
+footer a {
+    color: var(--color-footer-link);
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+}
+
+
+/* ==========================================================================
+   14. MEDIA QUERY - tablets and up (min-width: 600px)
+   ========================================================================== */
+@media (min-width: 600px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    /* 2-column grids */
+    .project-grid,
+    .internship-grid,
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* CTA buttons sit side by side */
+    .cta a {
+        flex: 0 1 auto;
+    }
+
+    /* Buttons shrink to content width */
+    button {
+        width: auto;
+        margin-right: var(--space-sm);
+    }
+
+    table {
+        font-size: 1rem;
+    }
+
+    footer {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+    }
+}
+
+
+/* ==========================================================================
+   15. MEDIA QUERY - desktops (min-width: 992px)
+   ========================================================================== */
+@media (min-width: 992px) {
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    h3 {
+        font-size: 1.25rem;
+    }
+
+    /* Header and footer content aligned to the 1100px container */
+    header,
+    footer {
+        padding-left: max(var(--space-lg), calc((100% - var(--container)) / 2 + var(--space-lg)));
+        padding-right: max(var(--space-lg), calc((100% - var(--container)) / 2 + var(--space-lg)));
+    }
+
+    /* Horizontal nav on the same row as the brand */
+    nav {
+        width: auto;
+    }
+
+    nav > ul {
+        flex-wrap: nowrap;
+    }
+
+    main {
+        padding-left: var(--space-lg);
+        padding-right: var(--space-lg);
+    }
+
+    /* Hero: GRID - photo in the left column, text stacked in the right column */
+    .hero {
+        display: grid;
+        grid-template-columns: 14rem 1fr;
+        align-content: center;
+        justify-items: start;
+        column-gap: var(--space-xl);
+        row-gap: var(--space-sm);
+        min-height: 19rem;      /* grows if the text is taller than the photo */
+        padding: 2.5rem 3rem;
+        text-align: left;
+    }
+
+    .hero > img {
+        grid-column: 1;
+        grid-row: 1 / span 3;   /* photo spans the h1 + tagline + location rows */
+        align-self: center;
+        width: 14rem;
+        height: 14rem;
+    }
+
+    .hero > h1,
+    .hero > p {
+        grid-column: 2;
+    }
+
+    .hero > h1::after {
+        margin-inline: 0;
+    }
+
+    /* 3-column project and skill grids */
+    .project-grid,
+    .skills-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    form {
+        max-width: 720px;
+        padding: var(--space-xl);
+    }
+}

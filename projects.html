@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Projects built by Ennala Sreenidhi.">
+    <title>Projects | Ennala Sreenidhi</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <a class="skip-link visually-hidden-focusable" href="#main">Skip to main content</a>
+
+    <header>
+        <nav class="navbar navbar-expand-lg" aria-label="Main navigation">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">Ennala Sreenidhi</a>
+                <button type="button" id="themeToggle" class="btn btn-sm btn-outline-secondary theme-toggle ms-auto me-2 ms-lg-3 me-lg-0 order-lg-last" aria-label="Switch to dark theme" aria-pressed="false">🌙 Dark</button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav ms-auto gap-lg-1 py-2 py-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="education.html">Education</a></li>
+                        <li class="nav-item"><a class="nav-link" href="skills.html">Skills</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="projects.html" aria-current="page">Projects</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main" class="container py-5" tabindex="-1">
+        <h1>Projects</h1>
+
+        <section class="mb-5">
+            <h2>Featured Projects</h2>
+            <div class="btn-group flex-wrap mb-3" role="group" aria-label="Filter projects by category">
+                <button type="button" class="btn btn-outline-primary active" data-filter="All" aria-pressed="true">All</button>
+                <button type="button" class="btn btn-outline-primary" data-filter="AI / ML" aria-pressed="false">AI / ML</button>
+                <button type="button" class="btn btn-outline-primary" data-filter="Full Stack" aria-pressed="false">Full Stack</button>
+                <button type="button" class="btn btn-outline-primary" data-filter="Mobile" aria-pressed="false">Mobile</button>
+            </div>
+            <p id="projectCount" class="text-body-secondary mb-4" aria-live="polite">Showing 6 of 6 projects</p>
+            <div id="projectGrid" class="row g-4 project-grid"></div>
+            <noscript>
+                <p>Turn on JavaScript to see the featured project cards, or browse them on <a href="https://github.com/sreenidhi2545">GitHub</a>.</p>
+            </noscript>
+        </section>
+
+        <section>
+            <h2>Additional Projects</h2>
+            <ul class="list-group shadow-sm">
+                <li class="list-group-item"><strong>Legal Guardian AI</strong> (FastAPI &middot; Gemini &middot; Document AI) &mdash; AI legal analysis with case-outcome prediction, PII redaction and SHA-256 document integrity. Team of 4.</li>
+                <li class="list-group-item"><strong>NicheMind</strong> &mdash; Market-research tool scraping 7 sources in parallel; returns honest null/404 instead of invented numbers.</li>
+                <li class="list-group-item"><strong>MSME Scheme Chatbot</strong> (LLaMA 3 &middot; LangChain &middot; ChromaDB &middot; FastAPI) &mdash; Multilingual RAG chatbot for government schemes.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="py-4">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 text-center text-md-start">
+            <p class="mb-0">&copy; <span id="year">2026</span> Ennala Sreenidhi</p>
+            <ul class="list-inline mb-0">
+                <li class="list-inline-item"><a href="https://github.com/sreenidhi2545" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                <li class="list-inline-item"><a href="https://www.linkedin.com/in/ennala-sreenidhi" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                <li class="list-inline-item"><a href="mailto:sreenidhiennala@gmail.com">Email</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="js/script.js" defer></script>
+</body>
+</html>

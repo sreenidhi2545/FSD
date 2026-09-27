@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get in touch with Ennala Sreenidhi.">
+    <title>Contact | Ennala Sreenidhi</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg" aria-label="Main navigation">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">Ennala Sreenidhi</a>
+                <button type="button" id="themeToggle" class="btn btn-sm btn-outline-secondary theme-toggle ms-auto me-2 ms-lg-3 me-lg-0 order-lg-last" aria-label="Switch to dark theme" aria-pressed="false">🌙 Dark</button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav ms-auto gap-lg-1 py-2 py-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="education.html">Education</a></li>
+                        <li class="nav-item"><a class="nav-link" href="skills.html">Skills</a></li>
+                        <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="contact.html" aria-current="page">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container py-5">
+        <h1>Contact Me</h1>
+        <p class="lead">Have an internship, project or hackathon idea? Feel free to reach out.</p>
+
+        <div class="alert alert-info shadow-sm mb-5">
+            I'm currently open to internship and full-time opportunities.
+        </div>
+
+        <div class="row g-4 g-lg-5">
+            <section class="col-12 col-lg-4">
+                <h2>Reach Me Directly</h2>
+                <ul class="list-group shadow-sm">
+                    <li class="list-group-item">Email: <a href="mailto:sreenidhiennala@gmail.com">sreenidhiennala@gmail.com</a></li>
+                    <li class="list-group-item">GitHub: <a href="https://github.com/sreenidhi2545" target="_blank" rel="noopener noreferrer">github.com/sreenidhi2545</a></li>
+                    <li class="list-group-item">LinkedIn: <a href="https://www.linkedin.com/in/ennala-sreenidhi" target="_blank" rel="noopener noreferrer">linkedin.com/in/ennala-sreenidhi</a></li>
+                </ul>
+            </section>
+
+            <section class="col-12 col-lg-8">
+                <h2>Send a Message</h2>
+                <form action="#" method="post" class="p-4 p-md-5 bg-white border rounded-3 shadow-sm">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="you@example.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone (optional)</label>
+                        <input type="tel" id="phone" name="phone" class="form-control" placeholder="10-digit mobile number" pattern="[0-9]{10}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subject</label>
+                        <select id="subject" name="subject" class="form-select" required>
+                            <option value="">-- Select a subject --</option>
+                            <option value="internship">Internship Opportunity</option>
+                            <option value="collaboration">Project Collaboration</option>
+                            <option value="hackathon">Hackathon / Team-up</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea id="message" name="message" class="form-control" rows="5" cols="40" placeholder="Write your message here" required></textarea>
+                    </div>
+                    <div class="d-grid d-sm-flex gap-2">
+                        <button type="submit" class="btn btn-primary px-4">Submit</button>
+                        <button type="reset" class="btn btn-secondary px-4">Reset</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <footer class="py-4">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 text-center text-md-start">
+            <p class="mb-0">&copy; <span id="year">2026</span> Ennala Sreenidhi</p>
+            <ul class="list-inline mb-0">
+                <li class="list-inline-item"><a href="https://github.com/sreenidhi2545" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                <li class="list-inline-item"><a href="https://www.linkedin.com/in/ennala-sreenidhi" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                <li class="list-inline-item"><a href="mailto:sreenidhiennala@gmail.com">Email</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="js/script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,587 @@
+/* ==========================================================================
+   Portfolio of Ennala Sreenidhi - Task 4: Bootstrap 5 UI + custom theme
+   + light/dark theme (switched by js/script.js via data-bs-theme on <html>)
+   Loaded AFTER bootstrap.min.css, so these rules override Bootstrap.
+   Mobile-first: base styles target small screens, then min-width media
+   queries scale type and spacing up at 600px, 768px and 992px.
+   Layout (grid, navbar, cards, forms, table) comes from Bootstrap classes;
+   this file keeps the custom colours, fonts and finishing touches.
+   ========================================================================== */
+
+/* ---------- TYPOGRAPHY: Google Fonts (Poppins for headings, Inter for body) ---------- */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap");
+
+
+/* ==========================================================================
+   1. COLOURS - palette defined once as CSS variables, used everywhere
+   ========================================================================== */
+:root {
+    --color-primary: #1e3a8a;        /* navy - links, headings accents, buttons */
+    --color-primary-dark: #172554;   /* hover state for primary */
+    --color-secondary: #0f766e;      /* teal - secondary highlights */
+    --color-accent: #f59e0b;         /* amber - decorative bars, badges */
+    --color-bg: #f8fafc;             /* page background */
+    --color-surface: #ffffff;        /* cards, header, table, form */
+    --color-text: #0f172a;           /* main text (contrast ~17:1 on bg) */
+    --color-muted: #475569;          /* secondary text (contrast ~7:1 on bg) */
+    --color-border: #e2e8f0;         /* hairlines and card borders */
+    --color-tint: #eef2ff;           /* soft primary tint for highlights */
+    --color-highlight: #fef3c7;      /* light amber table-row hover */
+    --color-input-border: #94a3b8;   /* form field borders */
+    --color-placeholder: #64748b;    /* placeholder text */
+    --color-footer-text: #cbd5e1;    /* footer body text */
+    --color-footer-link: #e2e8f0;    /* footer links */
+    --color-focus-ring: rgba(30, 58, 138, 0.25); /* input focus glow */
+    --color-footer-bg: #0f172a;      /* dark footer band */
+    --color-button: #1e3a8a;         /* solid primary button */
+    --color-button-hover: #172554;
+    --color-button-secondary: #475569;       /* Reset button */
+    --color-button-secondary-hover: #0f172a;
+
+    /* Typography tokens */
+    --font-heading: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+    /* Spacing and shape tokens */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2.5rem;
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-pill: 999px;
+    --shadow: 0 1px 3px rgba(15, 23, 42, 0.08), 0 4px 12px rgba(15, 23, 42, 0.05);
+    --shadow-hover: 0 8px 24px rgba(15, 23, 42, 0.12);
+
+    /* Bootstrap theme variables mapped onto the palette above */
+    --bs-primary: var(--color-primary);
+    --bs-primary-rgb: 30, 58, 138;
+    --bs-secondary-color: var(--color-muted);
+    --bs-body-font-family: var(--font-body);
+    --bs-body-line-height: 1.65;
+    --bs-body-color: var(--color-text);
+    --bs-body-bg: var(--color-bg);
+    --bs-emphasis-color: var(--color-text);
+    --bs-border-color: var(--color-border);
+    --bs-border-radius: var(--radius-sm);
+    --bs-border-radius-lg: var(--radius-md);
+    --bs-link-color: var(--color-primary);
+    --bs-link-color-rgb: 30, 58, 138;
+    --bs-link-hover-color: var(--color-secondary);
+    --bs-link-hover-color-rgb: 15, 118, 110;
+    --bs-box-shadow-sm: var(--shadow);
+}
+
+
+/* ==========================================================================
+   2. BOX MODEL - border-box on every element and pseudo-element
+      (Bootstrap's reboot does this too; kept here so the file stands alone)
+   ========================================================================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Images never overflow their container */
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* ==========================================================================
+   3. TYPOGRAPHY - base (mobile) type scale
+   ========================================================================== */
+body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-heading);
+    line-height: 1.25;
+    color: var(--color-text);
+}
+
+h1 {
+    font-size: 2rem;          /* 32px on mobile */
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-lg);
+}
+
+h2 {
+    font-size: 1.5rem;        /* 24px */
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-md);
+}
+
+h3 {
+    font-size: 1.125rem;      /* 18px */
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+}
+
+/* Pseudo-element (::after): decorative accent bar under every page title */
+main h1::after {
+    content: "";
+    display: block;
+    width: 3rem;
+    height: 4px;
+    margin-top: var(--space-sm);
+    border-radius: var(--radius-pill);
+    background-color: var(--color-accent);
+}
+
+/* Element selector: links */
+a {
+    color: var(--color-primary);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+/* Pseudo-class :hover on links (buttons keep their own hover colours) */
+a:not(.btn):hover {
+    color: var(--color-secondary);
+}
+
+/* Pseudo-class :focus - visible keyboard focus ring for all links and buttons */
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/* Attribute selector + pseudo-element: mark links that open in a new tab */
+a[target="_blank"]::after {
+    content: " \2197";        /* north-east arrow */
+    font-size: 0.85em;
+}
+
+/* Attribute selector: mailto links */
+a[href^="mailto:"] {
+    word-break: break-all;
+}
+
+
+/* ==========================================================================
+   4. HEADER & NAVBAR - sticky position, Bootstrap navbar restyled
+   ========================================================================== */
+header {
+    position: sticky;           /* POSITIONING: header stays at top while scrolling */
+    top: 0;
+    z-index: 1030;              /* above Bootstrap content, same level as .fixed-top */
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow);
+}
+
+/* Child selector (>): brand link directly inside the navbar container */
+.navbar > .container > .navbar-brand {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--color-primary);
+}
+
+/* Descendant selector: every link in the navbar */
+.navbar .nav-link {
+    padding: var(--space-xs) 0.75rem;
+    border-radius: var(--radius-pill);
+    color: var(--color-muted);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.navbar .nav-link:hover {
+    color: var(--color-primary);
+    background-color: var(--color-tint);
+}
+
+/* Attribute selector: highlight the current page link (paired with .active) */
+.navbar .nav-link[aria-current="page"] {
+    color: var(--color-surface);
+    background-color: var(--color-primary);
+    font-weight: 600;
+}
+
+/* Toggler: remove Bootstrap's default blue glow, use the amber ring instead */
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+
+/* ==========================================================================
+   5. MAIN - lists inside page content
+   ========================================================================== */
+/* Custom bullet colour for any plain (unclassed) list */
+main ul:not([class]) li::marker {
+    color: var(--color-secondary);
+}
+
+/* Descendant selector: project names in the "Additional Projects" list */
+main li strong {
+    color: var(--color-primary);
+}
+
+
+/* ==========================================================================
+   6. HOME PAGE HERO (index.html) - Bootstrap row/cols, custom photo
+   ========================================================================== */
+.hero img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border: 4px solid var(--color-tint);
+    background-color: var(--color-tint);
+}
+
+.hero h1 {
+    margin-bottom: var(--space-sm);
+}
+
+.hero h1::after {
+    margin-inline: auto;        /* centre the accent bar on mobile */
+}
+
+/* :last-child + ::before - pin icon before the location line */
+.hero p:last-child::before {
+    content: "\1F4CD  ";
+}
+
+
+/* ==========================================================================
+   7. BUTTONS - Bootstrap buttons recoloured with the palette variables
+   ========================================================================== */
+.btn {
+    font-weight: 600;
+}
+
+.btn-primary {
+    --bs-btn-bg: var(--color-button);
+    --bs-btn-border-color: var(--color-button);
+    --bs-btn-hover-bg: var(--color-button-hover);
+    --bs-btn-hover-border-color: var(--color-button-hover);
+    --bs-btn-active-bg: var(--color-button-hover);
+    --bs-btn-active-border-color: var(--color-button-hover);
+}
+
+.btn-outline-primary {
+    --bs-btn-color: var(--color-primary);
+    --bs-btn-border-color: var(--color-primary);
+    --bs-btn-hover-color: var(--color-surface);
+    --bs-btn-hover-bg: var(--color-primary);
+    --bs-btn-hover-border-color: var(--color-primary);
+    --bs-btn-active-color: var(--color-surface);
+    --bs-btn-active-bg: var(--color-primary-dark);
+    --bs-btn-active-border-color: var(--color-primary-dark);
+}
+
+.btn-secondary {
+    --bs-btn-bg: var(--color-button-secondary);
+    --bs-btn-border-color: var(--color-button-secondary);
+    --bs-btn-hover-bg: var(--color-button-secondary-hover);
+    --bs-btn-hover-border-color: var(--color-button-secondary-hover);
+}
+
+
+/* ==========================================================================
+   8. CARDS - projects, internships and skill groups
+   ========================================================================== */
+.card {
+    --bs-card-border-color: var(--color-border);
+    --bs-card-border-radius: var(--radius-md);
+    --bs-card-inner-border-radius: calc(var(--radius-md) - 1px);
+    --bs-card-bg: var(--color-surface);
+}
+
+/* Hover lift shared by all card types */
+.lift {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.lift:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover) !important; /* beats Bootstrap's .shadow-sm !important */
+}
+
+/* Internship cards: teal accent bar on the left */
+.internship-card {
+    border-left: 4px solid var(--color-secondary);
+}
+
+/* Adjacent sibling: organisation line directly under each internship title */
+.card-title + .card-subtitle {
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--color-secondary);
+}
+
+/* Skill group headings sit smaller than page-level h2 */
+.skill-card .card-title {
+    font-size: 1.125rem;
+    color: var(--color-primary);
+}
+
+/* Badges: skills and tech stack share one pill style */
+.badge {
+    padding: 0.4em 0.8em;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-tint);
+    color: var(--color-primary);
+    font-weight: 500;
+    font-size: 0.8rem;
+    white-space: normal;        /* long skill names wrap instead of overflowing */
+    text-align: left;
+}
+
+/* Project image keeps a fixed 16:10 frame */
+.project-card .card-img-top {
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    background-color: var(--color-tint);
+}
+
+/* POSITIONING: absolute number badge in each project card corner (::before).
+   script.js sets data-number="01".."06", so a card keeps its number when
+   filtering hides others. Bootstrap .card is already position: relative. */
+.project-card::before {
+    content: attr(data-number);
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    z-index: 1;                 /* sits above the card image */
+    padding: 0.125rem 0.6rem;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-accent);
+    color: var(--color-text);
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+/* GitHub button area */
+.card-footer {
+    border-top-color: var(--color-border);
+    padding: var(--space-md) var(--space-lg);
+}
+
+
+/* ==========================================================================
+   9. TABLE - education.html (Bootstrap table themed with the palette)
+   ========================================================================== */
+.table {
+    --bs-table-striped-bg: var(--color-tint);
+    --bs-table-hover-bg: var(--color-highlight);
+    --bs-table-border-color: var(--color-border);
+    margin-bottom: 0;
+    font-size: 0.95rem;
+}
+
+/* Keeps columns readable; .table-responsive scrolls below this width */
+.table-responsive > .table {
+    min-width: 560px;
+}
+
+caption {
+    padding: 0 0 var(--space-sm);
+    font-size: 0.875rem;
+    color: var(--color-muted);
+}
+
+/* Header row colour */
+.table > thead th {
+    --bs-table-bg: var(--color-primary);
+    --bs-table-color: var(--color-surface);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+
+/* ==========================================================================
+   10. CONTACT FORM - contact.html (Bootstrap form controls themed)
+   ========================================================================== */
+.form-label {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.form-control,
+.form-select {
+    padding: 0.7rem 0.85rem;
+    border-color: var(--color-input-border);
+    color: var(--color-text);
+}
+
+/* ID selector: message box */
+#message {
+    min-height: 8rem;
+    resize: vertical;
+}
+
+.form-control::placeholder {
+    color: var(--color-placeholder);
+}
+
+/* :focus - clearly visible focus state in the brand colour */
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+
+
+/* ==========================================================================
+   11. ALERTS - soft left accent in the palette
+   ========================================================================== */
+.alert {
+    border-left-width: 4px;
+}
+
+
+/* ==========================================================================
+   12. FOOTER - dark band (layout from Bootstrap flex utilities)
+   ========================================================================== */
+footer {
+    margin-top: var(--space-xl);
+    background-color: var(--color-footer-bg);
+    color: var(--color-footer-text);
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: var(--color-footer-link);
+    text-decoration: none;
+}
+
+footer a:not(.btn):hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+}
+
+/* Child selector: spacing between footer links */
+footer ul > li:not(:last-child) {
+    margin-right: var(--space-md);
+}
+
+
+/* ==========================================================================
+   13. TASK 4 ELEMENTS - theme toggle button and project filter bar
+   ========================================================================== */
+.theme-toggle {
+    white-space: nowrap;
+    border-radius: var(--radius-pill);
+}
+
+/* Filter buttons wrap onto a second line on narrow phones */
+.btn-group.flex-wrap > .btn {
+    flex: 0 0 auto;
+}
+
+
+/* ==========================================================================
+   14. DARK THEME - same variable names, darker values.
+       Bootstrap 5.3 switches its own components on data-bs-theme="dark";
+       these overrides keep the custom palette in step.
+   ========================================================================== */
+[data-bs-theme="dark"] {
+    --color-primary: #93c5fd;        /* light blue - readable on dark bg */
+    --color-primary-dark: #bfdbfe;
+    --color-secondary: #5eead4;
+    --color-accent: #fbbf24;
+    --color-bg: #0b1120;
+    --color-surface: #111827;
+    --color-text: #e2e8f0;
+    --color-muted: #94a3b8;
+    --color-border: #334155;
+    --color-tint: #1e293b;
+    --color-highlight: #422006;      /* dark amber table-row hover */
+    --color-input-border: #475569;
+    --color-placeholder: #94a3b8;
+    --color-footer-bg: #020617;
+    --color-footer-text: #cbd5e1;
+    --color-footer-link: #e2e8f0;
+    --color-focus-ring: rgba(147, 197, 253, 0.35);
+    --color-button: #2563eb;         /* white text stays readable (5:1) */
+    --color-button-hover: #1d4ed8;
+    --color-button-secondary: #475569;
+    --color-button-secondary-hover: #334155;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.5);
+
+    /* RGB copies for Bootstrap utilities (badges, links) */
+    --bs-primary-rgb: 147, 197, 253;
+    --bs-link-color-rgb: 147, 197, 253;
+    --bs-link-hover-color-rgb: 94, 234, 212;
+    color-scheme: dark;
+}
+
+/* .bg-white on the hero and form is fixed white in Bootstrap; follow the theme */
+[data-bs-theme="dark"] .bg-white {
+    background-color: var(--color-surface) !important;
+}
+
+
+/* ==========================================================================
+   15. MEDIA QUERY - small tablets and up (min-width: 600px)
+   ========================================================================== */
+@media (min-width: 600px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    .table {
+        font-size: 1rem;
+    }
+}
+
+
+/* ==========================================================================
+   16. MEDIA QUERY - tablets and up (min-width: 768px, Bootstrap "md")
+   ========================================================================== */
+@media (min-width: 768px) {
+    /* Hero text is left-aligned from md, so the accent bar follows */
+    .hero h1::after {
+        margin-inline: 0;
+    }
+}
+
+
+/* ==========================================================================
+   17. MEDIA QUERY - desktops (min-width: 992px, Bootstrap "lg")
+   ========================================================================== */
+@media (min-width: 992px) {
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    h3 {
+        font-size: 1.25rem;
+    }
+
+    .hero img {
+        width: 14rem;
+        height: 14rem;
+    }
+}
