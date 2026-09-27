@@ -179,13 +179,52 @@ header {
     box-shadow: var(--shadow);
 }
 
-/* Child selector (>): brand link directly inside the navbar container */
-.navbar > .container > .navbar-brand {
+/* Child selector (>): brand link directly inside the top row */
+.navbar-top > .navbar-brand {
     font-family: var(--font-heading);
-    font-size: 1.25rem;
     font-weight: 700;
     letter-spacing: -0.01em;
     color: var(--color-primary);
+}
+
+/* Top row of the navbar: brand on the left, theme button + toggler on the
+   right, always on ONE line (flex-nowrap). From lg up the wrapper "dissolves"
+   (display: contents) so its children join Bootstrap's normal navbar row. */
+.navbar-top {
+    display: flex;
+    width: 100%;
+    gap: var(--space-sm);
+}
+
+.navbar-top > .navbar-brand {
+    min-width: 0;               /* lets text-truncate shorten a very long name */
+    margin-right: auto;         /* pushes the buttons to the right edge */
+    font-size: 1.05rem;         /* mobile size; grows from 576px */
+}
+
+/* Theme button: icon only on phones, icon + word from 576px */
+.theme-label {
+    display: none;
+}
+
+@media (min-width: 576px) {
+    .navbar-top > .navbar-brand {
+        font-size: 1.25rem;
+    }
+
+    .theme-label {
+        display: inline;
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar-top {
+        display: contents;
+    }
+
+    .navbar-top > .navbar-brand {
+        margin-right: var(--bs-navbar-brand-margin-end);
+    }
 }
 
 /* Descendant selector: every link in the navbar */
@@ -390,9 +429,109 @@ main li strong {
     font-size: 0.95rem;
 }
 
-/* Keeps columns readable; .table-responsive scrolls below this width */
-.table-responsive > .table {
-    min-width: 560px;
+/* Mobile-first STACKED TABLE: below 768px every row becomes a card and each
+   cell shows its column name from data-label. The header row is hidden
+   visually but kept for screen readers. From 768px it is a normal table. */
+.table-stack-wrap {
+    overflow-x: visible;        /* nothing to scroll in card mode */
+}
+
+.table-stack thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+.table-stack,
+.table-stack tbody,
+.table-stack tr,
+.table-stack td {
+    display: block;
+    width: 100%;
+}
+
+.table-stack caption {
+    display: block;
+}
+
+.table-stack.table-bordered > tbody > tr {
+    margin-bottom: var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.table-stack.table-bordered > tbody > tr > td {
+    display: grid;
+    grid-template-columns: 7.5rem 1fr;
+    gap: var(--space-sm);
+    border-width: 0 0 1px;
+    overflow-wrap: anywhere;
+}
+
+.table-stack.table-bordered > tbody > tr > td:last-child {
+    border-bottom-width: 0;
+}
+
+/* Attribute function: column name in front of each value */
+.table-stack td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--color-muted);
+}
+
+@media (min-width: 768px) {
+    .table-stack-wrap {
+        overflow-x: auto;
+        box-shadow: var(--shadow);
+    }
+
+    .table-stack {
+        display: table;
+    }
+
+    .table-stack thead {
+        position: static;
+        width: auto;
+        height: auto;
+        overflow: visible;
+        clip: auto;
+        white-space: normal;
+        display: table-header-group;
+    }
+
+    .table-stack caption {
+        display: table-caption;
+    }
+
+    .table-stack tbody {
+        display: table-row-group;
+    }
+
+    .table-stack.table-bordered > tbody > tr {
+        display: table-row;
+        margin-bottom: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .table-stack.table-bordered > tbody > tr > td {
+        display: table-cell;
+        width: auto;
+        border-width: 0 var(--bs-border-width);
+    }
+
+    .table-stack.table-bordered > tbody > tr > td:last-child {
+        border-bottom-width: 0;
+    }
+
+    .table-stack td::before {
+        content: none;
+    }
 }
 
 caption {

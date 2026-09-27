@@ -15,11 +15,13 @@
     <header>
         <nav class="navbar navbar-expand-lg" aria-label="Main navigation">
             <div class="container">
-                <a class="navbar-brand" href="index.html">Ennala Sreenidhi</a>
-                <button type="button" id="themeToggle" class="btn btn-sm btn-outline-secondary theme-toggle ms-auto me-2 ms-lg-3 me-lg-0 order-lg-last" aria-label="Switch to dark theme" aria-pressed="false">🌙 Dark</button>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <div class="navbar-top flex-nowrap align-items-center">
+                    <a class="navbar-brand text-truncate" href="index.html">Ennala Sreenidhi</a>
+                    <button type="button" id="themeToggle" class="btn btn-sm btn-outline-secondary theme-toggle ms-auto ms-lg-3 order-lg-last" aria-label="Switch to dark theme" aria-pressed="false"><span class="theme-icon" aria-hidden="true">🌙</span><span class="theme-label"> Dark</span></button>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
                 <div class="collapse navbar-collapse" id="mainNav">
                     <ul class="navbar-nav ms-auto gap-lg-1 py-2 py-lg-0">
                         <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
@@ -39,8 +41,8 @@
 
         <section class="mb-5">
             <h2>Academic Qualifications</h2>
-            <div class="table-responsive rounded-3 shadow-sm">
-                <table class="table table-striped table-hover table-bordered align-middle caption-top mb-0">
+            <div class="table-responsive table-stack-wrap rounded-3">
+                <table class="table table-stack table-striped table-hover table-bordered align-middle caption-top mb-0">
                     <caption>Academic qualifications of Ennala Sreenidhi</caption>
                     <thead>
                         <tr>
@@ -52,22 +54,22 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>B.Tech &mdash; Computer Science Engineering</td>
-                            <td>Stanley College of Engineering &amp; Technology for Women, Hyderabad</td>
-                            <td>2023&ndash;2027</td>
-                            <td>CGPA 8.4</td>
+                            <td data-label="Qualification">B.Tech &mdash; Computer Science Engineering</td>
+                            <td data-label="Institution">Stanley College of Engineering &amp; Technology for Women, Hyderabad</td>
+                            <td data-label="Year">2023&ndash;2027</td>
+                            <td data-label="Score">CGPA 8.4</td>
                         </tr>
                         <tr>
-                            <td>Intermediate (Class XII)</td>
-                            <td>Narayana Junior College</td>
-                            <td>2021&ndash;2023</td>
-                            <td>93%</td>
+                            <td data-label="Qualification">Intermediate (Class XII)</td>
+                            <td data-label="Institution">Narayana Junior College</td>
+                            <td data-label="Year">2021&ndash;2023</td>
+                            <td data-label="Score">93%</td>
                         </tr>
                         <tr>
-                            <td>Secondary School (Class X)</td>
-                            <td>Sri Chaitanya School</td>
-                            <td>2020</td>
-                            <td>CGPA 10</td>
+                            <td data-label="Qualification">Secondary School (Class X)</td>
+                            <td data-label="Institution">Sri Chaitanya School</td>
+                            <td data-label="Year">2020</td>
+                            <td data-label="Score">CGPA 10</td>
                         </tr>
                     </tbody>
                 </table>

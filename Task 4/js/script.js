@@ -119,8 +119,16 @@ function applyTheme(theme) {
 
     // CONDITIONS: if - only touch the button when it exists on this page
     if (toggle) {
-        // CONDITIONS: ternary operator - the button offers the OTHER theme
-        toggle.textContent = isDark ? "☀️ Light" : "🌙 Dark";
+        // CONDITIONS: ternary operator - the button offers the OTHER theme.
+        // Icon and word are separate spans so CSS can hide the word on phones.
+        const icon = toggle.querySelector(".theme-icon");
+        const label = toggle.querySelector(".theme-label");
+        if (icon && label) {
+            icon.textContent = isDark ? "\u2600\uFE0F" : "\uD83C\uDF19";
+            label.textContent = isDark ? " Light" : " Dark";
+        } else {
+            toggle.textContent = isDark ? "\u2600\uFE0F Light" : "\uD83C\uDF19 Dark";
+        }
         // TEMPLATE LITERAL
         toggle.setAttribute("aria-label", `Switch to ${isDark ? "light" : "dark"} theme`);
         toggle.setAttribute("aria-pressed", String(isDark));
